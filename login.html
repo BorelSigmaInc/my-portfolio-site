@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Zi-US</title>
+    <meta name="description" content="Sign in to your Zi-US account">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500&display=swap');
+        
+        :root {
+            --primary: #000000;
+            --secondary: #1a1a1a;
+            --accent: #0066ff;
+            --danger: #ff3366;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-400: #ced4da;
+            --gray-500: #adb5bd;
+            --gray-600: #6c757d;
+            --gray-700: #495057;
+            --gray-800: #343a40;
+            --gray-900: #212529;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 62.5%;
+        }
+
+        body {
+            font-family: 'Calibri Light', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 300;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: var(--primary);
+            background: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 40rem;
+            padding: 2rem;
+        }
+
+        .login-card {
+            background: white;
+            border: 1px solid var(--gray-200);
+            padding: 4rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .brand-name {
+            font-size: 2.4rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .login-subtitle {
+            font-size: 1.4rem;
+            color: var(--gray-600);
+        }
+
+        .social-login {
+            margin-bottom: 3rem;
+        }
+
+        .social-button {
+            width: 100%;
+            padding: 1.2rem 2rem;
+            border: 1px solid var(--gray-300);
+            background: white;
+            color: var(--primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            text-decoration: none;
+            margin-bottom: 1rem;
+            font-family: inherit;
+            font-weight: 300;
+        }
+
+        .social-button:hover {
+            background: var(--gray-100);
+            border-color: var(--gray-400);
+            transform: translateY(-1px);
+        }
+
+        .social-icon {
+            width: 18px;
+            height: 18px;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--gray-300);
+        }
+
+        .divider span {
+            background: white;
+            padding: 0 1.5rem;
+            position: relative;
+            color: var(--gray-600);
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            color: var(--gray-700);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem 1.4rem;
+            border: 1px solid var(--gray-300);
+            background: white;
+            font-size: 1.2rem;
+            font-family: inherit;
+            font-weight: 300;
+            transition: all 0.2s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+        }
+
+        .form-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .checkbox-wrapper input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--accent);
+        }
+
+        .checkbox-wrapper label {
+            font-size: 1.1rem;
+            color: var(--gray-700);
+        }
+
+        .forgot-link {
+            font-size: 1.1rem;
+            color: var(--accent);
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .forgot-link:hover {
+            opacity: 0.7;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 1.2rem 2rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            font-size: 1.3rem;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            letter-spacing: 0.05em;
+        }
+
+        .login-button:hover {
+            background: var(--secondary);
+            transform: translateY(-1px);
+        }
+
+        .signup-prompt {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--gray-200);
+            font-size: 1.1rem;
+            color: var(--gray-600);
+        }
+
+        .signup-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 400;
+            transition: opacity 0.2s ease;
+        }
+
+        .signup-link:hover {
+            opacity: 0.7;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray-600);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+        }
+
+        .back-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Error message styles */
+        .error-message {
+            color: var(--danger);
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        /* Loading state */
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--gray-300);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-left: 0.5rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 3rem 2rem;
+            }
+
+            .brand-name {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Back to Home -->
+    <a href="index.html" class="back-link">
+        <svg class="back-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+        </svg>
+        Back to Home
+    </a>
+
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <h1 class="brand-name">Zi-US</h1>
+                <p class="login-subtitle">Sign in to your account</p>
+            </div>
+
+            <!-- Social Login Options -->
+            <div class="social-login">
+                <button class="social-button" onclick="handleSocialLogin('google')">
+                    <svg class="social-icon" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M23.745 12.27c0-.79-.07-1.54-.19-2.27h-11.3v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82z"/>
+                        <path fill="#34A853" d="M12.255 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96h-3.98v3.09C3.515 21.3 7.565 24 12.255 24z"/>
+                        <path fill="#FBBC05" d="M5.525 14.29c-.25-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29V6.62h-3.98a11.86 11.86 0 000 10.76l3.98-3.09z"/>
+                        <path fill="#EA4335" d="M12.255 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C18.205 1.19 15.495 0 12.255 0c-4.69 0-8.74 2.7-10.71 6.62l3.98 3.09c.95-2.85 3.6-4.96 6.73-4.96z"/>
+                    </svg>
+                    Continue with Google
+                </button>
+
+                <button class="social-button" onclick="handleSocialLogin('github')">
+                    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    Continue with GitHub
+                </button>
+
+                <button class="social-button" onclick="handleSocialLogin('x')">
+                    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                    Continue with X
+                </button>
+            </div>
+
+            <!-- Divider -->
+            <div class="divider">
+                <span>OR</span>
+            </div>
+
+            <!-- Email/Password Form -->
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" id="email" class="form-input" placeholder="name@company.com" required>
+                    <div class="error-message" id="email-error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" class="form-input" placeholder="••••••••" required>
+                    <div class="error-message" id="password-error"></div>
+                </div>
+
+                <div class="form-footer">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="remember" name="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="login-button" id="loginBtn">
+                    Sign In
+                </button>
+            </form>
+
+            <div class="signup-prompt">
+                Don't have an account? <a href="#" class="signup-link">Sign up</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Handle social login
+        function handleSocialLogin(provider) {
+            console.log(`Logging in with ${provider}`);
+            
+            // Simulate authentication
+            const button = event.target.closest('.social-button');
+            const originalText = button.innerHTML;
+            button.innerHTML = `<span class="loading"></span> Connecting...`;
+            button.disabled = true;
+            
+            setTimeout(() => {
+                // In a real app, you would redirect to the OAuth provider
+                alert(`${provider.charAt(0).toUpperCase() + provider.slice(1)} authentication would happen here`);
+                button.innerHTML = originalText;
+                button.disabled = false;
+            }, 1500);
+        }
+
+        // Handle email/password login
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const loginBtn = document.getElementById('loginBtn');
+            
+            // Clear previous errors
+            document.querySelectorAll('.error-message').forEach(msg => {
+                msg.style.display = 'none';
+            });
+            
+            // Basic validation
+            if (!email.includes('@')) {
+                document.getElementById('email-error').textContent = 'Please enter a valid email address';
+                document.getElementById('email-error').style.display = 'block';
+                return;
+            }
+            
+            if (password.length < 8) {
+                document.getElementById('password-error').textContent = 'Password must be at least 8 characters';
+                document.getElementById('password-error').style.display = 'block';
+                return;
+            }
+            
+            // Show loading state
+            loginBtn.innerHTML = 'Signing In... <span class="loading"></span>';
+            loginBtn.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                console.log('Login attempt:', { email, password });
+                alert('Login successful! (This is a demo)');
+                
+                // Reset button
+                loginBtn.innerHTML = 'Sign In';
+                loginBtn.disabled = false;
+                
+                // In a real app, you would redirect to the dashboard
+                // window.location.href = '/dashboard';
+            }, 2000);
+        }
+
+        // Auto-focus email field
+        window.addEventListener('load', () => {
+            document.getElementById('email').focus();
+        });
+
+        // Handle Enter key in email field
+        document.getElementById('email').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('password').focus();
+            }
+        });
+    </script>
+</body>
+</html>
