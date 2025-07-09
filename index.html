@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Doe - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="nav-logo">John Doe</h1>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Hello, I'm John Doe</h1>
+            <p>Full Stack Developer & Designer</p>
+            <button class="cta-button" onclick="scrollToSection('projects')">View My Work</button>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <p>I'm a passionate developer with experience in modern web technologies. I love creating beautiful, functional websites that solve real problems.</p>
+            <div class="skills">
+                <span class="skill">JavaScript</span>
+                <span class="skill">React</span>
+                <span class="skill">Node.js</span>
+                <span class="skill">CSS</span>
+                <span class="skill">HTML</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2>My Projects</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <h3>E-commerce Website</h3>
+                    <p>A modern shopping platform built with React and Node.js</p>
+                    <div class="project-tech">React • Node.js • MongoDB</div>
+                </div>
+                <div class="project-card">
+                    <h3>Task Management App</h3>
+                    <p>Productivity app with real-time collaboration features</p>
+                    <div class="project-tech">Vue.js • Firebase • PWA</div>
+                </div>
+                <div class="project-card">
+                    <h3>Weather Dashboard</h3>
+                    <p>Beautiful weather app with location-based forecasts</p>
+                    <div class="project-tech">JavaScript • API • CSS Grid</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <p>Let's work together on your next project!</p>
+            <div class="contact-info">
+                <a href="mailto:john@example.com" class="contact-link">john@example.com</a>
+                <a href="https://github.com/johndoe" class="contact-link">GitHub</a>
+                <a href="https://linkedin.com/in/johndoe" class="contact-link">LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 John Doe. Built with ❤️ and deployed on Vercel.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
