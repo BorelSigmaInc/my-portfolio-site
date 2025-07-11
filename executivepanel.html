@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zi-US | Executive Management Dashboard</title>
+    <meta name="description" content="Strategic management dashboard for executive decisions and business intelligence">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500&display=swap');
+        
+        :root {
+            --primary: #000000;
+            --secondary: #1a1a1a;
+            --accent: #0066ff;
+            --danger: #ff3366;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --purple: #8b5cf6;
+            --pink: #ec4899;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-400: #ced4da;
+            --gray-500: #adb5bd;
+            --gray-600: #6c757d;
+            --gray-700: #495057;
+            --gray-800: #343a40;
+            --gray-900: #212529;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 62.5%;
+        }
+
+        body {
+            font-family: 'Calibri Light', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 300;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: var(--primary);
+            background: #ffffff;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--gray-200);
+            z-index: 1000;
+            padding: 1.2rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .brand-name {
+            font-size: 1.4rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        .nav-menu a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            position: relative;
+            transition: opacity 0.2s ease;
+        }
+
+        .nav-menu a:hover {
+            opacity: 0.6;
+        }
+
+        .nav-menu a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--primary);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--gray-300);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+
+        /* Dashboard Layout */
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            min-height: 100vh;
+            margin-top: 5rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: var(--gray-100);
+            border-right: 1px solid var(--gray-200);
+            padding: 2rem 0;
+        }
+
+        .sidebar-section {
+            margin-bottom: 3rem;
+        }
+
+        .sidebar-title {
+            font-size: 1rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gray-600);
+            padding: 0 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            padding: 0.8rem 2rem;
+            color: var(--gray-700);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-menu a:hover {
+            background: var(--gray-200);
+            color: var(--primary);
+        }
+
+        .sidebar-menu a.active {
+            background: white;
+            color: var(--primary);
+            border-right: 2px solid var(--accent);
+        }
+
+        .sidebar-icon {
+            width: 16px;
+            height: 16px;
+            opacity: 0.6;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 3rem;
+        }
+
+        /* Dashboard Header */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .dashboard-title h1 {
+            font-size: 2.4rem;
+            font-weight: 300;
+            margin-bottom: 0.4rem;
+        }
+
+        .dashboard-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray-600);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1.2rem;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            border: 1px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            letter-spacing: 0.02em;
+        }
+
+        .btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary);
+            border-color: var(--secondary);
+        }
+
+        /* KPI Cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .kpi-card {
+            background: white;
+            border: 1px solid var(--gray-200);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent);
+        }
+
+        .kpi-card.success::before {
+            background: var(--success);
+        }
+
+        .kpi-card.warning::before {
+            background: var(--warning);
+        }
+
+        .kpi-card.danger::before {
+            background: var(--danger);
+        }
+
+        .kpi-label {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            margin-bottom: 0.8rem;
+        }
+
+        .kpi-value {
+            font-size: 2.8rem;
+            font-weight: 300;
+            margin-bottom: 0.4rem;
+        }
+
+        .kpi-change {
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .kpi-change.positive {
+            color: var(--success);
+        }
+
+        .kpi-change.negative {
+            color: var(--danger);
+        }
+
+        /* Main Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Card Component */
+        .card {
+            background: white;
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 1.6rem 2rem;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 400;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .card-action {
+            padding: 0.4rem 0.8rem;
+            font-size: 1rem;
+            color: var(--gray-600);
+            background: transparent;
+            border: 1px solid var(--gray-300);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .card-action:hover {
+            background: var(--gray-50);
+            color: var(--primary);
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        /* Strategic Initiatives */
+        .initiative-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .initiative-item {
+            display: flex;
+            align-items: center;
+            gap: 1.6rem;
+            padding: 1.2rem;
+            background: var(--gray-50);
+            transition: all 0.2s ease;
+        }
+
+        .initiative-item:hover {
+            background: var(--gray-100);
+        }
+
+        .initiative-priority {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--danger);
+        }
+
+        .initiative-priority.medium {
+            background: var(--warning);
+        }
+
+        .initiative-priority.low {
+            background: var(--success);
+        }
+
+        .initiative-info {
+            flex: 1;
+        }
+
+        .initiative-name {
+            font-weight: 400;
+            color: var(--primary);
+            margin-bottom: 0.2rem;
+        }
+
+        .initiative-meta {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            display: flex;
+            gap: 1.2rem;
+        }
+
+        .initiative-progress {
+            width: 100px;
+            height: 4px;
+            background: var(--gray-200);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+        }
+
+        /* Decision Queue */
+        .decision-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .decision-item {
+            padding: 1.6rem;
+            background: var(--gray-50);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .decision-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .decision-title {
+            font-weight: 400;
+            color: var(--primary);
+        }
+
+        .decision-status {
+            padding: 0.4rem 0.8rem;
+            font-size: 1rem;
+            border-radius: 0.2rem;
+            font-weight: 400;
+        }
+
+        .decision-status.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .decision-status.approved {
+            background: #e6f4ea;
+            color: #1e7e34;
+        }
+
+        .decision-meta {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+        }
+
+        .decision-actions {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .decision-btn {
+            padding: 0.4rem 1rem;
+            font-size: 1rem;
+            border: 1px solid var(--gray-300);
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .decision-btn:hover {
+            background: var(--gray-50);
+        }
+
+        .decision-btn.approve {
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .decision-btn.reject {
+            color: var(--danger);
+            border-color: var(--danger);
+        }
+
+        /* Activity Timeline */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1.6rem;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 1.2rem;
+            position: relative;
+        }
+
+        .timeline-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .timeline-icon.meeting {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .timeline-icon.decision {
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+
+        .timeline-icon.report {
+            background: #fce4ec;
+            color: #c2185b;
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-title {
+            font-weight: 400;
+            margin-bottom: 0.2rem;
+        }
+
+        .timeline-meta {
+            font-size: 1rem;
+            color: var(--gray-600);
+        }
+
+        /* Call to Action */
+        .cta-section {
+            background: var(--gray-100);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .cta-title {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .cta-description {
+            font-size: 1.2rem;
+            color: var(--gray-600);
+            margin-bottom: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-left">
+                <span class="brand-name">Zi-US Executive</span>
+                <ul class="nav-menu">
+                    <li><a href="#" class="active">Dashboard</a></li>
+                    <li><a href="#">Strategy</a></li>
+                    <li><a href="#">Reports</a></li>
+                    <li><a href="#">Team</a></li>
+                    <li><a href="#">Settings</a></li>
+                </ul>
+            </div>
+            <div class="nav-actions">
+                <button class="btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2v20M2 12h20"/>
+                    </svg>
+                    Quick Action
+                </button>
+                <div class="user-profile">
+                    <span style="font-size: 1.2rem;">John Doe</span>
+                    <div class="user-avatar">JD</div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Layout -->
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Main</h3>
+                <ul class="sidebar-menu">
+                    <li>
+                        <a href="#" class="active">
+                            <svg class="sidebar-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+                            </svg>
+                            Overview
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <svg class="sidebar-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
+                            </svg>
+                            Planning
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <svg class="sidebar-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            Objectives
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Intelligence</h3>
+                <ul class="sidebar-menu">
+                    <li>
+                        <a href="#">
+                            <svg class="sidebar-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                            </svg>
+                            Analytics
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <svg class="sidebar-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                            Performance
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <svg class="sidebar-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/>
+                            </svg>
+                            Insights
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Communication</h3>
+                <ul class="sidebar-menu">
+                    <li>
+                        <a href="#">
+                            <svg class="sidebar-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+                            </svg>
+                            Discussions
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <svg class="sidebar-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-4 6V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1z"/>
+                            </svg>
+                            Messages
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Header -->
+            <div class="dashboard-header">
+                <div class="dashboard-title">
+                    <h1>Executive Dashboard</h1>
+                    <p class="dashboard-subtitle">Real-time business intelligence and strategic oversight</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn">Export Report</button>
+                    <button class="btn btn-primary">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2v20M2 12h20"/>
+                        </svg>
+                        New Initiative
+                    </button>
+                </div>
+            </div>
+
+            <!-- KPI Cards -->
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-label">Revenue Growth</div>
+                    <div class="kpi-value">$12.4M</div>
+                    <div class="kpi-change positive">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M7 14l5-5 5 5z"/>
+                        </svg>
+                        18.2% from last quarter
+                    </div>
+                </div>
+                <div class="kpi-card success">
+                    <div class="kpi-label">Market Share</div>
+                    <div class="kpi-value">23.8%</div>
+                    <div class="kpi-change positive">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M7 14l5-5 5 5z"/>
+                        </svg>
+                        2.3% increase
+                    </div>
+                </div>
+                <div class="kpi-card warning">
+                    <div class="kpi-label">Operating Margin</div>
+                    <div class="kpi-value">15.2%</div>
+                    <div class="kpi-change negative">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                        0.8% decrease
+                    </div>
+                </div>
+                <div class="kpi-card danger">
+                    <div class="kpi-label">Customer NPS</div>
+                    <div class="kpi-value">72</div>
+                    <div class="kpi-change positive">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M7 14l5-5 5 5z"/>
+                        </svg>
+                        5 points improvement
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Grid -->
+            <div class="dashboard-grid">
+                <!-- Strategic Initiatives -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Strategic Initiatives</h3>
+                        <div class="card-actions">
+                            <button class="card-action">View All</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="initiative-list">
+                            <div class="initiative-item">
+                                <div class="initiative-priority"></div>
+                                <div class="initiative-info">
+                                    <div class="initiative-name">Digital Transformation Phase 2</div>
+                                    <div class="initiative-meta">
+                                        <span>Due: Q3 2025</span>
+                                        <span>•</span>
+                                        <span>Owner: Sarah Chen</span>
+                                    </div>
+                                </div>
+                                <div class="initiative-progress">
+                                    <div class="progress-fill" style="width: 65%"></div>
+                                </div>
+                            </div>
+                            <div class="initiative-item">
+                                <div class="initiative-priority medium"></div>
+                                <div class="initiative-info">
+                                    <div class="initiative-name">Market Expansion - APAC</div>
+                                    <div class="initiative-meta">
+                                        <span>Due: Q4 2025</span>
+                                        <span>•</span>
+                                        <span>Owner: Michael Ross</span>
+                                    </div>
+                                </div>
+                                <div class="initiative-progress">
+                                    <div class="progress-fill" style="width: 40%"></div>
+                                </div>
+                            </div>
+                            <div class="initiative-item">
+                                <div class="initiative-priority low"></div>
+                                <div class="initiative-info">
+                                    <div class="initiative-name">Sustainability Program</div>
+                                    <div class="initiative-meta">
+                                        <span>Due: Q1 2026</span>
+                                        <span>•</span>
+                                        <span>Owner: Emily Johnson</span>
+                                    </div>
+                                </div>
+                                <div class="initiative-progress">
+                                    <div class="progress-fill" style="width: 25%"></div>
+                                </div>
+                            </div>
+                            <div class="initiative-item">
+                                <div class="initiative-priority"></div>
+                                <div class="initiative-info">
+                                    <div class="initiative-name">AI Integration Strategy</div>
+                                    <div class="initiative-meta">
+                                        <span>Due: Q2 2025</span>
+                                        <span>•</span>
+                                        <span>Owner: David Kim</span>
+                                    </div>
+                                </div>
+                                <div class="initiative-progress">
+                                    <div class="progress-fill" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Decision Queue -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Pending Decisions</h3>
+                        <div class="card-actions">
+                            <button class="card-action">Filter</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="decision-list">
+                            <div class="decision-item">
+                                <div class="decision-header">
+                                    <h4 class="decision-title">Acquisition Proposal - TechCo</h4>
+                                    <span class="decision-status pending">Pending</span>
+                                </div>
+                                <div class="decision-meta">
+                                    <span>$45M valuation • Due by: Mar 15</span>
+                                </div>
+                                <div class="decision-actions">
+                                    <button class="decision-btn approve">Approve</button>
+                                    <button class="decision-btn reject">Reject</button>
+                                    <button class="decision-btn">Details</button>
+                                </div>
+                            </div>
+                            <div class="decision-item">
+                                <div class="decision-header">
+                                    <h4 class="decision-title">Budget Increase - R&D</h4>
