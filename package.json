@@ -4,13 +4,17 @@
   "description": "A simple portfolio website deployed on Vercel",
   "main": "index.html",
   "scripts": {
-    "start": "serve .",
+    "start": "serve . -p $PORT",
+    "build": "echo 'No build needed for static site'",
     "dev": "serve . -l 3000"
   },
-  "keywords": ["portfolio", "vercel", "html", "css", "javascript"],
-  "author": "Your Name",
+  "keywords": ["portfolio", "vercel", "html"],
+  "author": "BorelSigmaInc",
   "license": "MIT",
   "devDependencies": {
     "serve": "^14.0.0"
+  },
+  "engines": {
+    "node": ">=16.x"
   }
 }
