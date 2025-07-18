@@ -624,6 +624,286 @@
             margin-right: auto;
         }
 
+        /* Team Section */
+        .team-section {
+            padding: 8rem 0;
+            background: var(--gray-100);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .team-member {
+            text-align: center;
+            background: white;
+            padding: 3rem 2rem;
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+
+        .team-avatar {
+            width: 100px;
+            height: 100px;
+            background: var(--gray-300);
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--gray-600);
+        }
+
+        .team-member h4 {
+            font-size: 1.6rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member .role {
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .team-member p {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        /* Perks Section */
+        .perks {
+            padding: 8rem 0;
+        }
+
+        .perks-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        .perk-card {
+            display: flex;
+            gap: 3rem;
+            align-items: flex-start;
+            padding: 3rem;
+            background: var(--gray-100);
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s ease;
+        }
+
+        .perk-card:hover {
+            background: white;
+            transform: translateX(8px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        }
+
+        .perk-icon {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 2.4rem;
+        }
+
+        .perk-content h4 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .perk-content p {
+            font-size: 1.2rem;
+            color: var(--gray-600);
+            line-height: 1.8;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 8rem 0;
+            background: var(--gray-100);
+        }
+
+        .faq-container {
+            max-width: 80rem;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border: 1px solid var(--gray-200);
+            margin-bottom: 1.6rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question {
+            padding: 2.4rem 3rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.6rem;
+            font-weight: 400;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: var(--gray-100);
+        }
+
+        .faq-toggle {
+            font-size: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            padding: 0 3rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 3rem 2.4rem;
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            font-size: 1.2rem;
+            color: var(--gray-600);
+            line-height: 1.8;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 8rem 0;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .testimonial-card {
+            background: var(--gray-100);
+            padding: 3rem;
+            border: 1px solid var(--gray-200);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            font-size: 4rem;
+            color: var(--accent);
+            opacity: 0.2;
+        }
+
+        .testimonial-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1.6rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--gray-300);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+        }
+
+        .author-info h5 {
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info p {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+        }
+
+        /* Diversity Section */
+        .diversity {
+            padding: 8rem 0;
+            background: var(--primary);
+            color: white;
+            text-align: center;
+        }
+
+        .diversity h2 {
+            font-size: 3.2rem;
+            font-weight: 200;
+            margin-bottom: 2rem;
+        }
+
+        .diversity p {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            max-width: 80rem;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        .diversity-stats {
+            display: flex;
+            gap: 6rem;
+            justify-content: center;
+            margin-top: 4rem;
+        }
+
+        .diversity-stat {
+            text-align: center;
+        }
+
+        .diversity-stat-value {
+            font-size: 3.2rem;
+            font-weight: 200;
+            display: block;
+            color: var(--accent);
+        }
+
+        .diversity-stat-label {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
         /* Footer (Same as index) */
         footer {
             padding: 4rem 0 2rem;
@@ -721,6 +1001,18 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .perks-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
             .footer-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -739,7 +1031,8 @@
                 font-size: 3.2rem;
             }
 
-            .hero-stats {
+            .hero-stats,
+            .diversity-stats {
                 flex-direction: column;
                 gap: 2rem;
             }
@@ -762,6 +1055,15 @@
 
             .life-gallery {
                 grid-template-columns: 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .perk-card {
+                flex-direction: column;
+                text-align: center;
             }
 
             .footer-bottom {
@@ -812,7 +1114,7 @@
         <div class="container">
             <h1>Build the Future of Development</h1>
             <p>Join our team of innovators, creators, and problem-solvers who are transforming how developers build and deploy applications.</p>
-            <a href="#positions" class="btn" style="background: white; color: var(--primary);">View Open Positions</a>
+            <a href="plasma-physics-research.html" class="btn" style="background: white; color: var(--primary);">View Open Positions</a>
             
             <div class="hero-stats">
                 <div class="hero-stat">
