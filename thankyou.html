@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Received | Zi-US Research</title>
+    <style>
+        /* This CSS is identical to your application page for a consistent look and feel */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500&display=swap');
+        :root {
+            --primary: #000000; --secondary: #1a1a1a; --accent: #0066ff;
+            --gray-100: #f8f9fa; --gray-200: #e9ecef; --gray-600: #6c757d;
+            --success: #10b981;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { font-size: 62.5%; }
+        body { font-family: 'Calibri Light', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 300; font-size: 1.4rem; line-height: 1.6; color: var(--primary); background: var(--gray-100); }
+        nav { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px); border-bottom: 1px solid var(--gray-200); padding: 1.2rem 0; }
+        .nav-container { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .brand-name { font-size: 1.4rem; font-weight: 400; letter-spacing: 0.05em; text-decoration: none; color: var(--primary); }
+        .container { max-width: 800px; margin: 6rem auto; padding: 0 2rem; text-align: center; }
+        .feedback-card { background: white; border: 1px solid var(--gray-200); padding: 5rem 3rem; }
+        .feedback-card h1 { font-size: 3.2rem; font-weight: 300; margin-bottom: 1rem; color: var(--primary); }
+        .feedback-card p { font-size: 1.6rem; color: var(--gray-600); margin-bottom: 3rem; }
+        .btn { display: inline-block; width: auto; padding: 1.2rem 3rem; font-size: 1.2rem; font-weight: 400; text-align: center; cursor: pointer; transition: all 0.2s ease; border: 1px solid var(--primary); background: var(--primary); color: white; text-decoration: none; }
+        .btn-secondary { background: var(--secondary); border-color: var(--secondary); }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="brand-name">Zi-US Research</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="feedback-card">
+            <h1>Thank You for Your Application</h1>
+            <p id="thank-you-message">We have successfully received your application. A confirmation email has been sent to the address you provided. Our team will review your submission and contact you if your qualifications meet our needs.</p>
+            <a href="career.html" class="btn btn-secondary">← Return to Careers</a>
+        </div>
+    </div>
+
+    <script>
+        // This script dynamically updates the thank you message based on the job title in the URL.
+        window.onload = function() {
+            const thankYouMessage = document.getElementById('thank-you-message');
+            const urlParams = new URLSearchParams(window.location.search);
+            const jobTitle = urlParams.get('job'); // Gets 'job' from a URL like "...?job=Plasma%20Physicist"
+
+            if (jobTitle) {
+                // If a job title is found, display the specific message.
+                thankYouMessage.textContent = `We have successfully received your application for the ${jobTitle} position. A confirmation email has been sent to the address you provided. Our team will review your submission and contact you if your qualifications meet our needs.`;
+            }
+            // If no job title is in the URL, the default message in the HTML is shown.
+        };
+    </script>
+</body>
+</html>
