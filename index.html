@@ -672,7 +672,6 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav>
         <div class="container">
             <div class="nav-container">
@@ -707,7 +706,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <div class="hero-grid">
@@ -758,7 +756,6 @@
         </div>
     </section>
 
-    <!-- Integration Section -->
     <section class="integration" id="integration">
         <div class="container">
             <div class="section-header">
@@ -791,7 +788,6 @@
         </div>
     </section>
 
-    <!-- Features Section -->
     <section class="features" id="features">
         <div class="container">
             <div class="section-header">
@@ -835,7 +831,6 @@
         </div>
     </section>
 
-    <!-- Workflow Section -->
     <section class="workflow" id="workflow">
         <div class="container">
             <div class="section-header">
@@ -864,7 +859,6 @@
         </div>
     </section>
 
-    <!-- Terminal Section -->
     <section class="terminal-section">
         <div class="container">
             <div class="section-header">
@@ -904,7 +898,6 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
     <section class="cta">
         <div class="container">
             <h2>Ready to build something amazing?</h2>
@@ -916,7 +909,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-grid">
@@ -959,7 +951,7 @@
                 <div class="footer-column">
                     <h5>Legal</h5>
                     <ul class="footer-links">
-                        <li><a href="#">Privacy</a></li>
+                        <li><a href="privacy.html">Privacy</a></li>
                         <li><a href="#">Terms</a></li>
                         <li><a href="#">Security</a></li>
                         <li><a href="#">Compliance</a></li>
@@ -990,6 +982,13 @@
             </div>
         </div>
     </footer>
+
+    <div id="cookie-banner" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: #212529; color: #f8f9fa; padding: 1.6rem 2rem; z-index: 2000; font-size: 1.3rem; line-height: 1.6;">
+        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1440px; margin: 0 auto;">
+            <p style="margin: 0;">We use cookies to improve your experience. By using our site, you agree to our <a href="privacy.html" style="color: #0066ff; text-decoration: underline;">Privacy & Cookie Policy</a>.</p>
+            <button id="cookie-accept-btn" style="padding: 0.8rem 2rem; font-size: 1.1rem; background: white; color: black; border: none; cursor: pointer; margin-left: 2rem;">Accept</button>
+        </div>
+    </div>
 
     <script>
         // Smooth scrolling for anchor links
@@ -1070,17 +1069,21 @@
             terminalLines.forEach(line => line.style.opacity = '0');
             terminalObserver.observe(terminal);
         }
+    </script>
+    
+    <script>
+        // Self-contained script for the cookie banner
+        document.addEventListener('DOMContentLoaded', function() {
+            const cookieBanner = document.getElementById('cookie-banner');
+            const acceptBtn = document.getElementById('cookie-accept-btn');
 
-        // Copy code functionality
-        document.querySelector('.code-preview').addEventListener('click', function() {
-            const codeText = this.querySelector('.code-content').innerText;
-            navigator.clipboard.writeText(codeText).then(() => {
-                // Visual feedback
-                const originalBg = this.style.background;
-                this.style.background = '#f0f0f0';
-                setTimeout(() => {
-                    this.style.background = originalBg;
-                }, 200);
+            if (!localStorage.getItem('cookieConsent')) {
+                cookieBanner.style.display = 'block';
+            }
+
+            acceptBtn.addEventListener('click', function() {
+                localStorage.setItem('cookieConsent', 'true');
+                cookieBanner.style.display = 'none';
             });
         });
     </script>
