@@ -1,14 +1,8 @@
 {
-  "version": 2,
-  "builds": [
-    { "src": "*.html", "use": "@vercel/static" },
-    { "src": "styles/*.css", "use": "@vercel/static" },
-    { "src": "scripts/*.js", "use": "@vercel/static" }
-  ],
   "rewrites": [
-    { "source": "/partners", "destination": "/partners.html" },
-    { "source": "/(.*)", "destination": "/index.html" }
-  ],
-  "cleanUrls": true,
-  "trailingSlash": false
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
